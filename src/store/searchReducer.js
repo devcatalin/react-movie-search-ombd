@@ -1,28 +1,46 @@
-import { FETCH_MOVIES, FETCH_MOVIES_FULFILLED, FETCH_MOVIES_FAILED } from "./searchActions";
+import {
+  SEARCH_MOVIES_INIT,
+  SEARCH_MOVIES_FULFILLED,
+  SEARCH_MOVIES_FAILED,
+  SEARCH_MOVIES_CLEAR,
+} from "./searchActions";
 
 const initialState = {
-  isFetchingMovies: false,
-  movies: [],
+  isSearching: false,
+  results: [],
+  totalResults: 0,
+  error: null,
 };
 
 export default function searchReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_MOVIES: {
+    case SEARCH_MOVIES_INIT: {
       return {
         ...state,
-        isFetchingMovies: true,
+        isSearching: true,
+        error: null,
       };
     }
-    case FETCH_MOVIES_FULFILLED: {
+    case SEARCH_MOVIES_FULFILLED: {
       return {
         ...state,
-        isFetchingMovies: false,
+        isSearching: false,
+        results: action.payload.results,
       };
     }
-    case FETCH_MOVIES_FAILED: {
+    case SEARCH_MOVIES_FAILED: {
       return {
         ...state,
-        isFetchingMovies: false,
+        isSearching: false,
+        error: action.payload.error,
+      };
+    }
+    case SEARCH_MOVIES_CLEAR: {
+      return {
+        ...state,
+        isSearching: false,
+        error: null,
+        results: [],
       };
     }
     default:

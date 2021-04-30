@@ -1,21 +1,42 @@
-export const FETCH_MOVIES = "FETCH_MOVIES";
-export const FETCH_MOVIES_FULFILLED = "FETCH_MOVIES_FULFILLED";
-export const FETCH_MOVIES_FAILED = "FETCH_MOVIES_FAILED";
+import api from "../api";
 
-export const fetchMovies = () => {
+export const SEARCH_MOVIES_INIT = "SEARCH_MOVIES_INIT";
+export const SEARCH_MOVIES_FULFILLED = "SEARCH_MOVIES_FULFILLED";
+export const SEARCH_MOVIES_FAILED = "SEARCH_MOVIES_FAILED";
+export const SEARCH_MOVIES_CLEAR = "SEARCH_MOVIES_CLEAR";
+
+export const searchMoviesInit = () => {
   return {
-    type: FETCH_MOVIES,
+    type: SEARCH_MOVIES_INIT,
   };
 };
 
-export const fetchMoviesFulfilled = () => {
+export const searchMoviesFulfilled = ({ results, totalResults }) => {
   return {
-    type: FETCH_MOVIES_FULFILLED,
+    type: SEARCH_MOVIES_FULFILLED,
+    payload: { results, totalResults },
   };
 };
 
-export const fetchMoviesFailed = () => {
+export const searchMoviesFailed = (error) => {
   return {
-    type: FETCH_MOVIES_FAILED,
+    type: SEARCH_MOVIES_FAILED,
+    payload: { error },
+  };
+};
+
+export const searchMoviesClear = () => {
+  return {
+    type: SEARCH_MOVIES_CLEAR,
+  };
+};
+
+export const searchMoviesAsync = ({ searchText }) => {
+  return function (dispatch) {
+    dispatch(searchMoviesInit());
+    api
+      .getMovies({ searchText })
+      .then(({ results, totalResults }) => dispatch(searchMoviesFulfilled({ results, totalResults })))
+      .catch((error) => dispatch(searchMoviesFailed(error.message)));
   };
 };
