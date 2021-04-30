@@ -9,6 +9,15 @@ export const SEARCH_TEXT_CHANGE = "SEARCH_TEXT_CHANGE";
 export const SORT_ASCENDING = "SORT_ASCENDING";
 export const SORT_DESCENDING = "SORT_DESCENDING";
 
+export const SET_SEARCH_TYPE = "SET_SEARCH_TYPE";
+
+export const setSearchType = (searchType) => {
+  return {
+    type: SET_SEARCH_TYPE,
+    payload: { searchType },
+  };
+};
+
 export const sortAscending = () => {
   return {
     type: SORT_ASCENDING,
@@ -54,11 +63,11 @@ export const searchMoviesClear = () => {
   };
 };
 
-export const searchMoviesAsync = ({ searchText }) => {
+export const searchMoviesAsync = ({ searchText, searchType }) => {
   return function (dispatch) {
     dispatch(searchMoviesInit());
     api
-      .getMovies({ searchText })
+      .getMovies({ searchText, searchType })
       .then(({ results, totalResults }) => dispatch(searchMoviesFulfilled({ results, totalResults })))
       .catch((error) => dispatch(searchMoviesFailed(error.message)));
   };

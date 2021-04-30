@@ -6,11 +6,13 @@ import {
   SEARCH_TEXT_CHANGE,
   SORT_ASCENDING,
   SORT_DESCENDING,
+  SET_SEARCH_TYPE,
 } from "./searchActions";
 
 const initialState = {
   isSearching: false,
   searchText: "",
+  searchType: null,
   results: [],
   totalResults: 0,
   error: null,
@@ -36,10 +38,11 @@ export default function searchReducer(state = initialState, action) {
       };
     }
     case SEARCH_MOVIES_FULFILLED: {
+      const { results } = action.payload;
       return {
         ...state,
         isSearching: false,
-        results: action.payload.results,
+        results,
       };
     }
     case SEARCH_MOVIES_FAILED: {
@@ -73,6 +76,12 @@ export default function searchReducer(state = initialState, action) {
       return {
         ...state,
         results: [...state.results.sort(compareMovieTitles).reverse()],
+      };
+    }
+    case SET_SEARCH_TYPE: {
+      return {
+        ...state,
+        searchType: action.payload.searchType,
       };
     }
     default:

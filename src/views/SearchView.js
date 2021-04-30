@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Input, Select } from "antd";
 import { useDebouncedCallback } from "use-debounce";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import {
   searchTextChange,
   sortAscending,
   sortDescending,
+  setSearchType,
 } from "../store/searchActions";
 
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -20,6 +21,7 @@ function SearchView() {
   const dispatch = useDispatch();
 
   const searchText = useSelector((store) => store.search.searchText);
+  const searchType = useSelector((store) => store.search.searchType);
   const searchResults = useSelector((store) => store.search.results);
   const searchError = useSelector((store) => store.search.error);
   const isSearching = useSelector((store) => store.search.isSearching);
@@ -36,6 +38,7 @@ function SearchView() {
     dispatch(
       searchMoviesAsync({
         searchText,
+        searchType,
       })
     );
   };
@@ -50,7 +53,19 @@ function SearchView() {
     }
   };
 
+  const onFilterChange = (filterValue) => {
+    if (filterValue && filterValue !== "all") {
+      dispatch(setSearchType(filterValue));
+    } else {
+      dispatch(setSearchType(null));
+    }
+  };
+
   const debouncedSearch = useDebouncedCallback(search, 1000);
+
+  useEffect(() => {
+    debouncedSearch();
+  }, [searchType, debouncedSearch]);
 
   return (
     <div>
@@ -71,7 +86,7 @@ function SearchView() {
           <Option value="desc">Descending</Option>
         </Select>
         <label style={{ marginLeft: 20 }}>Filter:</label>
-        <Select defaultValue="all" style={{ width: 120, marginLeft: 15 }}>
+        <Select onChange={onFilterChange} defaultValue="all" style={{ width: 120, marginLeft: 15 }}>
           <Option value="all">All</Option>
           <Option value="movies">Movies</Option>
           <Option value="series">Series</Option>

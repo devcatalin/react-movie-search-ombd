@@ -13,8 +13,8 @@ function MovieList({ movies }) {
 
   return (
     <Row gutter={24}>
-      {movies.map((result) => (
-        <Col style={{ marginBottom: 24 }} key={result.imdbID} xs={12} md={6} lg={4}>
+      {movies.map((result, index) => (
+        <Col style={{ marginBottom: 24 }} key={index} xs={12} md={6} lg={4}>
           <MovieCard movie={result} isFavorite={isFavorite(result.imdbID)} />
         </Col>
       ))}
