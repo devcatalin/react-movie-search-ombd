@@ -2,9 +2,9 @@ import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Search from "./views/Search";
-import Favorites from "./views/Favorites";
-import Profile from "./views/Profile";
+import SearchView from "./views/SearchView";
+import FavoritesView from "./views/FavoritesView";
+import ProfileView from "./views/ProfileView";
 
 import { Layout, Menu } from "antd";
 
@@ -30,13 +30,13 @@ function App() {
         <Content>
           <Switch>
             <Route path="/search">
-              <Search />
+              <SearchView />
             </Route>
             <Route path="/favorites">
-              <Favorites />
+              <FavoritesView />
             </Route>
             <Route path="/profile">
-              <Profile />
+              <ProfileView />
             </Route>
           </Switch>
         </Content>
