@@ -2,3 +2,12 @@
 .HeartIcon {
     cursor: pointer;
 }
+
+.PosterImage {
+    max-width:500px;
+    max-height:320px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    display: inline-block;
+}

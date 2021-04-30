@@ -1,19 +1,13 @@
 import React from "react";
 
-import MovieCard from "../components/MovieCard";
-
 import { useSelector } from "react-redux";
+
+import MovieList from "../components/MovieList";
 
 function FavoritesView() {
   const favoritesById = useSelector((store) => store.profile.favoritesById);
   const movies = Object.values(favoritesById);
-  return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard key={movie.imdbID} isFavorite={true} movie={movie} />
-      ))}
-    </div>
-  );
+  return <MovieList movies={movies} />;
 }
 
 export default FavoritesView;

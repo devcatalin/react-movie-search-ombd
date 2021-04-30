@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchMoviesAsync, searchMoviesClear } from "../store/searchActions";
 
 import LoadingSpinner from "../components/LoadingSpinner";
-import SearchResults from "../components/SearchResults";
+import MovieList from "../components/MovieList";
 
 const { Search } = Input;
 
@@ -32,14 +32,19 @@ function SearchView() {
 
   return (
     <div>
-      <label>Search movies:</label>
-      <Search onSearch={debouncedSearch} allowClear enterButton />
+      <label style={{ fontWeight: 500, fontSize: 22 }}>Search movies:</label>
+      <Search
+        onSearch={debouncedSearch}
+        allowClear
+        enterButton
+        style={{ marginBottom: 24, width: 500, display: "block" }}
+      />
       {searchError ? (
         <p>{searchError}</p>
       ) : isSearching ? (
         <LoadingSpinner />
       ) : (
-        <SearchResults results={searchResults}></SearchResults>
+        <MovieList movies={searchResults}></MovieList>
       )}
     </div>
   );

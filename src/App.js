@@ -28,17 +28,19 @@ function App() {
           </Menu>
         </Header>
         <Content>
-          <Switch>
-            <Route path="/search">
-              <SearchView />
-            </Route>
-            <Route path="/favorites">
-              <FavoritesView />
-            </Route>
-            <Route path="/profile">
-              <ProfileView />
-            </Route>
-          </Switch>
+          <div className="ContentContainer">
+            <Switch>
+              <Route path="/search">
+                <SearchView />
+              </Route>
+              <Route path="/favorites">
+                <FavoritesView />
+              </Route>
+              <Route path="/profile">
+                <ProfileView />
+              </Route>
+            </Switch>
+          </div>
         </Content>
       </Router>
     </Layout>
