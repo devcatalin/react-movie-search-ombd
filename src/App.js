@@ -1,26 +1,47 @@
 import "./App.css";
-import { Button } from "antd";
 
-import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { fetchMovies } from "./store/actions";
+import Search from "./views/Search";
+import Favorites from "./views/Favorites";
+import Users from "./views/Users";
+
+import { Layout, Menu } from "antd";
+
+const { Header, Content } = Layout;
 
 function App() {
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => {
-    console.log({ state });
-    return state.movies;
-  });
-
   return (
-    <div className="App">
-      {movies.map((movie) => (
-        <p>{movie}</p>
-      ))}
-      <Button onClick={() => dispatch(fetchMovies())} type="primary">
-        Test button
-      </Button>
-    </div>
+    <Layout>
+      <Router>
+        <Header>
+          <Menu theme="dark" mode="horizontal">
+            <Menu.Item key="1">
+              <Link to="/search">Search</Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/favorites">Favorites</Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to="/users">Users</Link>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Content>
+          <Switch>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/favorites">
+              <Favorites />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+          </Switch>
+        </Content>
+      </Router>
+    </Layout>
   );
 }
 
