@@ -1,7 +1,13 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
-import reducer from "./reducer";
+import profileReducer from "./profileReducer";
+import searchReducer from "./searchReducer";
 
-const store = createStore(reducer);
+const store = createStore(
+  combineReducers({
+    profile: profileReducer,
+    search: searchReducer,
+  })
+);
 
 export default store;

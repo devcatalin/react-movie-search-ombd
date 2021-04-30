@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Search from "./views/Search";
 import Favorites from "./views/Favorites";
-import Users from "./views/Users";
+import Profile from "./views/Profile";
 
 import { Layout, Menu } from "antd";
 
@@ -12,7 +12,7 @@ const { Header, Content } = Layout;
 
 function App() {
   return (
-    <Layout>
+    <Layout style={{ minHeight: "100vh" }}>
       <Router>
         <Header>
           <Menu theme="dark" mode="horizontal">
@@ -23,7 +23,7 @@ function App() {
               <Link to="/favorites">Favorites</Link>
             </Menu.Item>
             <Menu.Item key="3">
-              <Link to="/users">Users</Link>
+              <Link to="/profile">Profile</Link>
             </Menu.Item>
           </Menu>
         </Header>
@@ -35,8 +35,8 @@ function App() {
             <Route path="/favorites">
               <Favorites />
             </Route>
-            <Route path="/users">
-              <Users />
+            <Route path="/profile">
+              <Profile />
             </Route>
           </Switch>
         </Content>
