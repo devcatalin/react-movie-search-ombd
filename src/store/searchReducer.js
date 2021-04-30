@@ -3,10 +3,12 @@ import {
   SEARCH_MOVIES_FULFILLED,
   SEARCH_MOVIES_FAILED,
   SEARCH_MOVIES_CLEAR,
+  SEARCH_TEXT_CHANGE,
 } from "./searchActions";
 
 const initialState = {
   isSearching: false,
+  searchText: "",
   results: [],
   totalResults: 0,
   error: null,
@@ -41,6 +43,12 @@ export default function searchReducer(state = initialState, action) {
         isSearching: false,
         error: null,
         results: [],
+      };
+    }
+    case SEARCH_TEXT_CHANGE: {
+      return {
+        ...state,
+        searchText: action.payload.searchText,
       };
     }
     default:

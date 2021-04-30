@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Input } from "antd";
 import { useDebouncedCallback } from "use-debounce";
 import { useDispatch, useSelector } from "react-redux";
-import { searchMoviesAsync, searchMoviesClear } from "../store/searchActions";
+import { searchMoviesAsync, searchMoviesClear, searchTextChange } from "../store/searchActions";
 import { useLocation } from "react-router-dom";
 
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -12,24 +12,24 @@ const { Search } = Input;
 
 function SearchView() {
   const dispatch = useDispatch();
-  const location = useLocation();
 
+  const searchText = useSelector((store) => store.search.searchText);
   const searchResults = useSelector((store) => store.search.results);
   const searchError = useSelector((store) => store.search.error);
   const isSearching = useSelector((store) => store.search.isSearching);
 
-  useEffect(() => {
-    dispatch(searchMoviesClear());
-  }, [dispatch, location]);
+  const onChangeSearch = (value) => {
+    dispatch(searchTextChange(value));
+  };
 
-  const search = (value) => {
-    if (!value || value.trim() === "") {
+  const search = () => {
+    if (!searchText || searchText.trim() === "") {
       dispatch(searchMoviesClear());
       return;
     }
     dispatch(
       searchMoviesAsync({
-        searchText: value,
+        searchText,
       })
     );
   };
@@ -40,6 +40,8 @@ function SearchView() {
     <div>
       <label style={{ fontWeight: 500, fontSize: 22 }}>Search movie:</label>
       <Search
+        value={searchText}
+        onChange={(e) => onChangeSearch(e.target.value)}
         onSearch={debouncedSearch}
         allowClear
         enterButton

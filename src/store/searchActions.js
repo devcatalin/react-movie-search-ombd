@@ -4,6 +4,14 @@ export const SEARCH_MOVIES_INIT = "SEARCH_MOVIES_INIT";
 export const SEARCH_MOVIES_FULFILLED = "SEARCH_MOVIES_FULFILLED";
 export const SEARCH_MOVIES_FAILED = "SEARCH_MOVIES_FAILED";
 export const SEARCH_MOVIES_CLEAR = "SEARCH_MOVIES_CLEAR";
+export const SEARCH_TEXT_CHANGE = "SEARCH_TEXT_CHANGE";
+
+export const searchTextChange = (searchText) => {
+  return {
+    type: SEARCH_TEXT_CHANGE,
+    payload: { searchText }
+  }
+}
 
 export const searchMoviesInit = () => {
   return {
