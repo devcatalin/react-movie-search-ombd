@@ -26,11 +26,11 @@ function MovieCard({ movie, isFavorite }) {
       </p>
       <span className="HeartIcon" onClick={onClickHeartIcon}>
         {isFavorite ? (
-          <Tooltip title="Add to favorites">
+          <Tooltip title="Remove from favorites">
             <HeartFilled style={{ fontSize: 24 }} />
           </Tooltip>
         ) : (
-          <Tooltip title="Remove from favorites">
+          <Tooltip title="Add to favorites">
             <HeartOutlined style={{ fontSize: 24 }} />
           </Tooltip>
         )}
