@@ -1,12 +1,16 @@
-import { INSERT_FAVORITE_MOVIE, REMOVE_FAVORITE_MOVIE } from "./profileActions";
+import { SET_PROFILE, INSERT_FAVORITE_MOVIE, REMOVE_FAVORITE_MOVIE } from "./profileActions";
 
 const initialState = {
-  name: "",
   favoritesById: {},
 };
 
 export default function profileReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_PROFILE: {
+      return {
+        ...action.payload.profile,
+      };
+    }
     case INSERT_FAVORITE_MOVIE: {
       const { movie } = action.payload;
       return {
