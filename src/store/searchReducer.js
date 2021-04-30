@@ -4,6 +4,8 @@ import {
   SEARCH_MOVIES_FAILED,
   SEARCH_MOVIES_CLEAR,
   SEARCH_TEXT_CHANGE,
+  SORT_ASCENDING,
+  SORT_DESCENDING,
 } from "./searchActions";
 
 const initialState = {
@@ -12,6 +14,16 @@ const initialState = {
   results: [],
   totalResults: 0,
   error: null,
+};
+
+const compareMovieTitles = (a, b) => {
+  if (a.Title < b.Title) {
+    return -1;
+  }
+  if (a.Title > b.Title) {
+    return 1;
+  }
+  return 0;
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -49,6 +61,18 @@ export default function searchReducer(state = initialState, action) {
       return {
         ...state,
         searchText: action.payload.searchText,
+      };
+    }
+    case SORT_ASCENDING: {
+      return {
+        ...state,
+        results: [...state.results.sort(compareMovieTitles)],
+      };
+    }
+    case SORT_DESCENDING: {
+      return {
+        ...state,
+        results: [...state.results.sort(compareMovieTitles).reverse()],
       };
     }
     default:

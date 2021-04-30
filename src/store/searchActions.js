@@ -6,12 +6,27 @@ export const SEARCH_MOVIES_FAILED = "SEARCH_MOVIES_FAILED";
 export const SEARCH_MOVIES_CLEAR = "SEARCH_MOVIES_CLEAR";
 export const SEARCH_TEXT_CHANGE = "SEARCH_TEXT_CHANGE";
 
+export const SORT_ASCENDING = "SORT_ASCENDING";
+export const SORT_DESCENDING = "SORT_DESCENDING";
+
+export const sortAscending = () => {
+  return {
+    type: SORT_ASCENDING,
+  };
+};
+
+export const sortDescending = () => {
+  return {
+    type: SORT_DESCENDING,
+  };
+};
+
 export const searchTextChange = (searchText) => {
   return {
     type: SEARCH_TEXT_CHANGE,
-    payload: { searchText }
-  }
-}
+    payload: { searchText },
+  };
+};
 
 export const searchMoviesInit = () => {
   return {
