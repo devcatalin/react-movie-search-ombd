@@ -18,6 +18,8 @@ const getMovies = async ({ searchText }) => {
   };
 };
 
-export default {
+const api = {
   getMovies,
 };
+
+export default api;
