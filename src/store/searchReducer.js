@@ -18,11 +18,11 @@ const initialState = {
   error: null,
 };
 
-const compareMovieTitles = (a, b) => {
-  if (a.Title < b.Title) {
+const compareMovieTitles = (a, b, prop) => {
+  if (a[prop] < b[prop]) {
     return -1;
   }
-  if (a.Title > b.Title) {
+  if (a[prop] > b[prop]) {
     return 1;
   }
   return 0;
@@ -69,13 +69,13 @@ export default function searchReducer(state = initialState, action) {
     case SORT_ASCENDING: {
       return {
         ...state,
-        results: [...state.results.sort(compareMovieTitles)],
+        results: [...state.results.sort((a, b) => compareMovieTitles(a, b, action.payload.sortProp))],
       };
     }
     case SORT_DESCENDING: {
       return {
         ...state,
-        results: [...state.results.sort(compareMovieTitles).reverse()],
+        results: [...state.results.sort((a, b) => compareMovieTitles(a, b, action.payload.sortProp)).reverse()],
       };
     }
     case SET_SEARCH_TYPE: {

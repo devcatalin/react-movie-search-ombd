@@ -46,10 +46,14 @@ function SearchView() {
   const onSortChange = (sortType) => {
     if (sortType === "default") {
       search();
-    } else if (sortType === "asc") {
-      dispatch(sortAscending());
-    } else if (sortType === "desc") {
-      dispatch(sortDescending());
+    } else if (sortType === "asc_title") {
+      dispatch(sortAscending("Title"));
+    } else if (sortType === "desc_title") {
+      dispatch(sortDescending("Title"));
+    } else if (sortType === "asc_year") {
+      dispatch(sortAscending("Year"));
+    } else if (sortType === "desc_year") {
+      dispatch(sortDescending("Year"));
     }
   };
 
@@ -80,10 +84,12 @@ function SearchView() {
       />
       <div style={{ marginBottom: 25 }}>
         <label>Sort:</label>
-        <Select onChange={onSortChange} defaultValue="default" style={{ width: 120, marginLeft: 15 }}>
+        <Select onChange={onSortChange} defaultValue="default" style={{ width: 200, marginLeft: 15 }}>
           <Option value="default">Default</Option>
-          <Option value="asc">Ascending</Option>
-          <Option value="desc">Descending</Option>
+          <Option value="asc_title">By Title ascending</Option>
+          <Option value="desc_title">By Title descending</Option>
+          <Option value="asc_year">By Year ascending</Option>
+          <Option value="desc_year">By Year descending</Option>
         </Select>
         <label style={{ marginLeft: 20 }}>Filter:</label>
         <Select onChange={onFilterChange} defaultValue="all" style={{ width: 120, marginLeft: 15 }}>

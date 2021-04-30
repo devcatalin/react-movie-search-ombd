@@ -18,15 +18,17 @@ export const setSearchType = (searchType) => {
   };
 };
 
-export const sortAscending = () => {
+export const sortAscending = (sortProp) => {
   return {
     type: SORT_ASCENDING,
+    payload: { sortProp }
   };
 };
 
-export const sortDescending = () => {
+export const sortDescending = (sortProp) => {
   return {
     type: SORT_DESCENDING,
+    payload: { sortProp }
   };
 };
 

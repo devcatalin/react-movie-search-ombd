@@ -21,6 +21,9 @@ function MovieCard({ movie, isFavorite }) {
   return (
     <Card cover={<img alt={movie.Title} src={movie.Poster} />}>
       <p>{movie.Title}</p>
+      <p>
+        Release year: <span style={{ fontWeight: 500 }}>{movie.Year}</span>
+      </p>
       <span className="HeartIcon" onClick={onClickHeartIcon}>
         {isFavorite ? (
           <Tooltip title="Add to favorites">
